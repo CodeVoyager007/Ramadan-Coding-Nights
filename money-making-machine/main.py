@@ -7,9 +7,6 @@ import requests
 # Set the title of our web app
 st.title("Money Making Machine")
 
-# At the top of your file, add:
-API_BASE_URL = st.secrets.get("API_BASE_URL", "http://localhost:8000")
-
 # Fallback business ideas
 BACKUP_IDEAS = [
     "Start a dropshipping business",
@@ -45,7 +42,11 @@ def generate_money():
 # Function to get business ideas from multiple APIs
 def fetch_side_hustle():
     try:
-        response = requests.get(f"{API_BASE_URL}/side_hustles")
+        # Try first API
+        response = requests.get(
+            "https://api.api-ninjas.com/v1/ideas?category=business",
+            headers={'X-Api-Key': 'YHKs/MIT//ZX/sPQYojyYw==DUzNkUsnFJo4N8ab'}
+        )
         if response.status_code == 200:
             data = response.json()
             if data:
